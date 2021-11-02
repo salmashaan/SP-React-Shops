@@ -1,7 +1,6 @@
 import { Button, Card, Col } from "react-bootstrap";
 import productStore from "../stores/productStore";
 import ProductModal from "./ProductModal";
-import ProductModalUpdate from "./ProductModalUpdate";
 
 function ProductCard({ product }) {
   const handleDelete = () => productStore.deleteProduct(product._id);

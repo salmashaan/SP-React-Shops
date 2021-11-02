@@ -1,8 +1,11 @@
 import "./App.css";
-import ProductList from "./components/ProductList";
 import { Route, Switch } from "react-router";
-import NavBar from "./components/NavBar";
 import { Container } from "react-bootstrap";
+
+// Components
+import NavBar from "./components/NavBar";
+import ShopList from "./components/ShopList";
+import ShopDetail from "./components/ShopDetail";
 
 function App() {
   return (
@@ -10,8 +13,11 @@ function App() {
       <NavBar />
       <Container>
         <Switch>
-          <Route path="/products">
-            <ProductList />
+          <Route path="/shops/:shopSlug">
+            <ShopDetail />
+          </Route>
+          <Route path="/shops">
+            <ShopList />
           </Route>
         </Switch>
       </Container>

@@ -2,13 +2,12 @@ import Card from "./ProductCard";
 import { useState } from "react";
 import ProductModal from "./ProductModal";
 import { observer } from "mobx-react";
-import productStore from "../stores/productStore";
-import { Button, Form, Row, Stack } from "react-bootstrap";
+import { Form, Row, Stack } from "react-bootstrap";
 
-function ProductList() {
+function ProductList({ products }) {
   const [query, setQuery] = useState("");
 
-  const productList = productStore.products
+  const productList = products
     .filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     )

@@ -18,6 +18,19 @@
   pointer-events: none;
 }
 
+.detail {
+  margin: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.detail-img {
+  width: 40%;
+  float: left;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

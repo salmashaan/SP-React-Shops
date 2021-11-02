@@ -2,18 +2,16 @@ import { Button, InputGroup, FormControl, Modal } from "react-bootstrap";
 import { useState } from "react";
 import productStore from "../stores/productStore";
 
-function ProductModal({ oldProduct }) {
+function ProductModal() {
   const [show, setShow] = useState(false);
-  const [product, setProduct] = useState(
-    oldProduct ?? {
-      name: "",
-      image: "",
-      price: 5,
-      description: "",
-      color: "black",
-      quantity: 5,
-    }
-  );
+  const [product, setProduct] = useState({
+    name: "",
+    image: "",
+    price: 5,
+    description: "",
+    color: "black",
+    quantity: 5,
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,17 +19,19 @@ function ProductModal({ oldProduct }) {
   const handleChange = (event) =>
     setProduct({ ...product, [event.target.name]: event.target.value });
 
+  const handleImage = (event) =>
+    setProduct({ ...product, image: event.target.files[0] });
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (oldProduct) productStore.updateProduct(product, oldProduct._id);
-    else productStore.createProduct(product);
+    productStore.createProduct(product);
     handleClose();
   };
 
   return (
     <>
       <Button variant="outline-dark" onClick={handleShow}>
-        {oldProduct ? "Edit" : "New"}
+        New
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>
@@ -50,9 +50,8 @@ function ProductModal({ oldProduct }) {
               <InputGroup.Text>Image</InputGroup.Text>
               <FormControl
                 name="image"
-                value={product.image}
-                type="text"
-                onChange={handleChange}
+                type="file"
+                onChange={handleImage}
                 placeholder="Image"
               />
             </InputGroup>
@@ -97,7 +96,7 @@ function ProductModal({ oldProduct }) {
               />
             </InputGroup>
             <Button variant="outline-dark" type="submit">
-              {oldProduct ? "Edit" : "Add"} Product
+              Add Product
             </Button>
           </form>
         </Modal.Body>
